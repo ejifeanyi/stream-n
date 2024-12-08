@@ -3,17 +3,18 @@
 import React, { useState } from "react";
 
 import { Home, User, RadioTower, Settings, LogOut, Menu } from "lucide-react";
+import Link from "next/link";
 
 const Sidebar = () => {
 	const [selected, setSelected] = useState("dashboard");
 	const [isOpen, setIsOpen] = useState(false);
 
 	const menuItems = [
-		{ id: "dashboard", name: "Dashboard", icon: <Home /> },
-		{ id: "accounts", name: "Accounts", icon: <User /> },
-		{ id: "go-live", name: "Go Live", icon: <RadioTower /> },
-		{ id: "settings", name: "Settings", icon: <Settings /> },
-		{ id: "logout", name: "Logout", icon: <LogOut /> },
+		{ id: "dashboard", name: "Dashboard", icon: <Home />, url: "/dashboard" },
+		{ id: "accounts", name: "Accounts", icon: <User />, url: "accounts" },
+		{ id: "go-live", name: "Go Live", icon: <RadioTower />, url: "/go-live" },
+		{ id: "settings", name: "Settings", icon: <Settings />, url: "/settings" },
+		{ id: "logout", name: "Logout", icon: <LogOut />, url: "#" },
 	];
 
 	return (
@@ -21,6 +22,7 @@ const Sidebar = () => {
 			<div className="mt-[150px] mx-3 fixed z-50 lg:relative flex flex-col bg-white text-gray-900 transition-all duration-300">
 				<div className="flex-grow">
 					{menuItems.map((item) => (
+						<Link href={item.url} >
 						<button
 							key={item.id}
 							onClick={() => setSelected(item.id)}
@@ -30,6 +32,7 @@ const Sidebar = () => {
 						>
 							<div className="text-xl">{item.icon}</div>
 						</button>
+						</Link>
 					))}
 				</div>
 			</div>

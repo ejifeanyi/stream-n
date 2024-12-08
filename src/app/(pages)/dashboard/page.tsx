@@ -1,12 +1,12 @@
-import Sidebar from "@/components/Sidebar";
+import VideoPreview from "@/components/VideoPreview";
 import React from "react";
 
 type Props = {};
 
 const dashboard = (props: Props) => {
 	return (
-		<div className="flex">
-			<Sidebar />
+		<div className="flex w-full h-full">
+			<VideoPreview />
 			<div>Dashboard</div>
 		</div>
 	);
