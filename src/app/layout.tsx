@@ -29,18 +29,18 @@ export default function RootLayout({
 			lang="en"
 			suppressHydrationWarning
 		>
-			<ThemeProvider
-				attribute="class"
-				defaultTheme="light"
-				enableSystem={false}
-				storageKey="streaming-theme"
+			<body
+				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
 			>
-				<body
-					className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+				<ThemeProvider
+					attribute="class"
+					defaultTheme="system"
+					enableSystem
+					disableTransitionOnChange
 				>
 					{children}
-				</body>
-			</ThemeProvider>
+				</ThemeProvider>
+			</body>
 		</html>
 	);
 }

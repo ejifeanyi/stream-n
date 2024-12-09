@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-
 import { Home, User, RadioTower, Settings, LogOut, Menu } from "lucide-react";
 import Link from "next/link";
 
@@ -11,31 +10,57 @@ const Sidebar = () => {
 
 	const menuItems = [
 		{ id: "dashboard", name: "Dashboard", icon: <Home />, url: "/dashboard" },
-		{ id: "accounts", name: "Accounts", icon: <User />, url: "accounts" },
+		{ id: "accounts", name: "Accounts", icon: <User />, url: "/accounts" },
 		{ id: "go-live", name: "Go Live", icon: <RadioTower />, url: "/go-live" },
 		{ id: "settings", name: "Settings", icon: <Settings />, url: "/settings" },
 		{ id: "logout", name: "Logout", icon: <LogOut />, url: "#" },
 	];
 
 	return (
-		<div className="flex h-screen border-r border-gray-200">
-			<div className="mt-[150px] mx-3 fixed z-50 lg:relative flex flex-col bg-white text-gray-900 transition-all duration-300">
-				<div className="flex-grow">
+		<div className="flex h-screen">
+			{/* Mobile Menu Toggle */}
+			<button
+				onClick={() => setIsOpen(!isOpen)}
+				className="lg:hidden fixed top-4 left-4 z-50 p-2 bg-secondary text-secondary-foreground rounded-full shadow-md focus:outline-none"
+			>
+				<Menu className="h-6 w-6" />
+			</button>
+
+			{/* Sidebar */}
+			<div
+				className={`fixed z-40 lg:relative flex flex-col h-full bg-card text-card-foreground transition-transform duration-300 ${
+					isOpen ? "translate-x-0" : "-translate-x-full"
+				} lg:translate-x-0 border-r border-border`}
+			>
+				<div className="mt-[150px] mx-3 flex-grow">
 					{menuItems.map((item) => (
-						<Link href={item.url} >
-						<button
+						<Link
 							key={item.id}
-							onClick={() => setSelected(item.id)}
-							className={`flex items-center w-full mb-2 rounded-xl p-4 text-left text-sm font-medium transition-all duration-300 hover:bg-gray-100 ${
-								selected === item.id ? "bg-black text-white" : "text-gray-800"
-							}`}
+							href={item.url}
 						>
-							<div className="text-xl">{item.icon}</div>
-						</button>
+							<button
+								onClick={() => setSelected(item.id)}
+								className={`flex items-center w-full mb-2 rounded-xl p-4 text-left text-sm font-medium transition-all duration-300 hover:bg-muted ${
+									selected === item.id
+										? "bg-primary text-primary-foreground"
+										: "text-muted-foreground"
+								}`}
+							>
+								<div className="text-xl mr-2">{item.icon}</div>
+								{item.name}
+							</button>
 						</Link>
 					))}
 				</div>
 			</div>
+
+			{/* Overlay for mobile */}
+			{isOpen && (
+				<div
+					className="fixed inset-0 z-30 bg-black/50 lg:hidden"
+					onClick={() => setIsOpen(false)}
+				></div>
+			)}
 		</div>
 	);
 };

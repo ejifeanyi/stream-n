@@ -16,7 +16,6 @@ const VideoPreview = () => {
 					video: true,
 					audio: true,
 				});
-
 				if (videoRef.current) {
 					videoRef.current.srcObject = stream;
 					setIsWebcamOn(true);
@@ -32,35 +31,26 @@ const VideoPreview = () => {
 		}
 	}, [isLive, isWebcamOn]);
 
-	const handleStartLive = () => {
-		setIsLive(true);
-	};
-
+	const handleStartLive = () => setIsLive(true);
 	const handleEndLive = () => {
 		if (videoRef.current && videoRef.current.srcObject) {
 			const stream = videoRef.current.srcObject as MediaStream;
 			stream.getTracks().forEach((track) => track.stop());
 		}
-
 		setIsLive(false);
 		setIsWebcamOn(false);
 	};
 
-	const openSettings = () => {
-		console.log("Open streaming settings");
-	};
-
 	return (
-		<div className="flex flex-col items-center justify-center w-full h-full">
-			{/* Video Container */}
-			<div className="w-11/12 max-w-4xl aspect-video bg-black rounded-3xl overflow-hidden relative">
+		<div className="relative flex flex-col h-full w-full bg-background text-foreground">
+			{/* Video Section */}
+			<div className="relative flex-1 bg-black">
 				<video
 					ref={videoRef}
 					className="w-full h-full object-cover"
 					autoPlay
 					muted
 				/>
-				{/* Overlay for Webcam Status */}
 				{!isWebcamOn && (
 					<div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white">
 						<span className="text-xl font-semibold">
@@ -70,35 +60,32 @@ const VideoPreview = () => {
 				)}
 			</div>
 
-			{/* Buttons Section */}
-			<div className="flex items-center gap-6 mt-6">
+			{/* Comments Overlay (Mobile) */}
+			<div className="absolute bottom-0 left-0 w-full bg-black bg-opacity-70 text-white p-4 sm:hidden">
+				<h3 className="text-sm font-bold">Live Comments</h3>
+				<p className="text-xs">No comments yet. Start interacting!</p>
+			</div>
+
+			{/* Control Buttons */}
+			<div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-4 sm:bottom-8">
 				<Button
-					onClick={openSettings}
-					variant="outline"
+					onClick={handleStartLive}
+					className="bg-primary text-primary-foreground px-4 py-2"
 				>
+					<Video />
+					<span>Go Live</span>
+				</Button>
+				<Button
+					onClick={handleEndLive}
+					className="bg-destructive text-destructive-foreground px-4 py-2"
+				>
+					<VideoOff />
+					<span>End Live</span>
+				</Button>
+				<Button className="bg-muted text-muted-foreground px-4 py-2">
 					<Settings />
 					<span>Settings</span>
 				</Button>
-
-				{!isLive ? (
-					<Button
-						onClick={handleStartLive}
-						variant="default"
-						className="flex items-center gap-2 px-6 py-3 bg-green-600 text-white hover:bg-green-500 rounded-lg transition"
-					>
-						<Video />
-						<span>Go Live</span>
-					</Button>
-				) : (
-					<Button
-						onClick={handleEndLive}
-						variant="destructive"
-						className="flex items-center gap-2 px-6 py-3 bg-red-600 text-white hover:bg-red-500 rounded-lg transition"
-					>
-						<VideoOff />
-						<span>End Live</span>
-					</Button>
-				)}
 			</div>
 		</div>
 	);
