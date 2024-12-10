@@ -17,7 +17,7 @@ const Sidebar = () => {
 	];
 
 	return (
-		<div className="flex h-screen">
+		<div className="flex h-screen fixed z-50">
 			{/* Mobile Menu Toggle */}
 			<button
 				onClick={() => setIsOpen(!isOpen)}
@@ -30,7 +30,7 @@ const Sidebar = () => {
 			<div
 				className={`fixed z-40 lg:relative flex flex-col h-full bg-card text-card-foreground transition-transform duration-300 ${
 					isOpen ? "translate-x-0" : "-translate-x-full"
-				} lg:translate-x-0 border-r border-border`}
+				} lg:translate-x-0 border-r border-border lg:w-[250px] w-[200px]`}
 			>
 				<div className="mt-[150px] mx-3 flex-grow">
 					{menuItems.map((item) => (
