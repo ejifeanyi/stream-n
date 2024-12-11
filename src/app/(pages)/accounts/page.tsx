@@ -42,7 +42,7 @@ const AccountsPage = () => {
 			</header>
 
 			{/* Connected Accounts List */}
-			<div className="bg-card rounded-xl shadow-lg p-6">
+			<div className="bg-card rounded-xl p-6">
 				<h2 className="text-lg font-semibold text-foreground mb-4">
 					Connected Accounts
 				</h2>

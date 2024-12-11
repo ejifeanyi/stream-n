@@ -59,7 +59,6 @@ const newFollowersConfig: ChartConfig = {
 	other: { label: "Other", color: "hsl(var(--chart-5))" },
 };
 
-
 // Engagement Rate Chart Data and Config
 const engagementRateData = [
 	{ month: "January", desktop: 186 },
@@ -75,119 +74,124 @@ const engagementRateConfig: ChartConfig = {
 
 const OverviewCard = () => {
 	return (
-		<div className="grid gap-6 md:grid-cols-3">
-			{/* Total Views */}
-			<Card>
-				<CardHeader>
-					<CardTitle>Total Views</CardTitle>
-					<CardDescription>January - June 2024</CardDescription>
-				</CardHeader>
-				<CardContent>
-					<ChartContainer config={totalViewsConfig}>
-						<LineChart
-							data={totalViewsData}
-							margin={{ left: 12, right: 12 }}
-						>
-							<CartesianGrid vertical={false} />
-							<XAxis
-								dataKey="month"
-								tickLine={false}
-								axisLine={false}
-								tickMargin={8}
-								tickFormatter={(value) => value.slice(0, 3)}
-							/>
-							<ChartTooltip
-								cursor={false}
-								content={<ChartTooltipContent />}
-							/>
-							<LineGraph
-								dataKey="desktop"
-								type="monotone"
-								stroke="var(--color-desktop)"
-								strokeWidth={2}
-								dot={false}
-							/>
-							<LineGraph
-								dataKey="mobile"
-								type="monotone"
-								stroke="var(--color-mobile)"
-								strokeWidth={2}
-								dot={false}
-							/>
-						</LineChart>
-					</ChartContainer>
-				</CardContent>
-				<CardFooter>
-					<div className="text-sm">
-						Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
-					</div>
-				</CardFooter>
-			</Card>
-
-			{/* New Followers */}
-			<Card>
-				<CardHeader>
-					<CardTitle>New Followers</CardTitle>
-					<CardDescription>January - June 2024</CardDescription>
-				</CardHeader>
-				<CardContent>
-					<ChartContainer
-						className="mx-auto max-h-[250px]"
-						config={newFollowersConfig} // Pass the config here
-					>
-						<PieChart>
-							<Pie
-								data={newFollowersData}
-								dataKey="visitors"
-								innerRadius={60}
-								nameKey="browser"
-								strokeWidth={5}
+		<>
+			<h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-black dark:text-white p-4">
+				Welcome Dave
+			</h1>
+			<div className="grid gap-6 md:grid-cols-3">
+				{/* Total Views */}
+				<Card>
+					<CardHeader>
+						<CardTitle>Total Views</CardTitle>
+						<CardDescription>January - June 2024</CardDescription>
+					</CardHeader>
+					<CardContent>
+						<ChartContainer config={totalViewsConfig}>
+							<LineChart
+								data={totalViewsData}
+								margin={{ left: 12, right: 12 }}
 							>
-								<LabelList position="center" />
-							</Pie>
-							<ChartTooltip
-								cursor={false}
-								content={<ChartTooltipContent hideLabel />}
-							/>
-						</PieChart>
-					</ChartContainer>
-				</CardContent>
-				<CardFooter className="text-sm">
-					Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
-				</CardFooter>
-			</Card>
-
-			{/* Engagement Rate */}
-			<Card>
-				<CardHeader>
-					<CardTitle>Engagement Rate</CardTitle>
-					<CardDescription>January - June 2024</CardDescription>
-				</CardHeader>
-				<CardContent>
-					<ChartContainer config={engagementRateConfig}>
-						<BarChart data={engagementRateData}>
-							<CartesianGrid vertical={false} />
-							<XAxis
-								dataKey="month"
-								tickFormatter={(value) => value.slice(0, 3)}
-							/>
-							<Bar
-								dataKey="desktop"
-								fill="var(--color-desktop)"
-							>
-								<LabelList
-									position="top"
-									className="fill-foreground"
+								<CartesianGrid vertical={false} />
+								<XAxis
+									dataKey="month"
+									tickLine={false}
+									axisLine={false}
+									tickMargin={8}
+									tickFormatter={(value) => value.slice(0, 3)}
 								/>
-							</Bar>
-						</BarChart>
-					</ChartContainer>
-				</CardContent>
-				<CardFooter className="text-sm">
-					Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
-				</CardFooter>
-			</Card>
-		</div>
+								<ChartTooltip
+									cursor={false}
+									content={<ChartTooltipContent />}
+								/>
+								<LineGraph
+									dataKey="desktop"
+									type="monotone"
+									stroke="var(--color-desktop)"
+									strokeWidth={2}
+									dot={false}
+								/>
+								<LineGraph
+									dataKey="mobile"
+									type="monotone"
+									stroke="var(--color-mobile)"
+									strokeWidth={2}
+									dot={false}
+								/>
+							</LineChart>
+						</ChartContainer>
+					</CardContent>
+					<CardFooter>
+						<div className="text-sm">
+							Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
+						</div>
+					</CardFooter>
+				</Card>
+
+				{/* New Followers */}
+				<Card>
+					<CardHeader>
+						<CardTitle>New Followers</CardTitle>
+						<CardDescription>January - June 2024</CardDescription>
+					</CardHeader>
+					<CardContent>
+						<ChartContainer
+							className="mx-auto max-h-[250px]"
+							config={newFollowersConfig} // Pass the config here
+						>
+							<PieChart>
+								<Pie
+									data={newFollowersData}
+									dataKey="visitors"
+									innerRadius={60}
+									nameKey="browser"
+									strokeWidth={5}
+								>
+									<LabelList position="center" />
+								</Pie>
+								<ChartTooltip
+									cursor={false}
+									content={<ChartTooltipContent hideLabel />}
+								/>
+							</PieChart>
+						</ChartContainer>
+					</CardContent>
+					<CardFooter className="text-sm">
+						Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
+					</CardFooter>
+				</Card>
+
+				{/* Engagement Rate */}
+				<Card>
+					<CardHeader>
+						<CardTitle>Engagement Rate</CardTitle>
+						<CardDescription>January - June 2024</CardDescription>
+					</CardHeader>
+					<CardContent>
+						<ChartContainer config={engagementRateConfig}>
+							<BarChart data={engagementRateData}>
+								<CartesianGrid vertical={false} />
+								<XAxis
+									dataKey="month"
+									tickFormatter={(value) => value.slice(0, 3)}
+								/>
+								<Bar
+									dataKey="desktop"
+									fill="var(--color-desktop)"
+								>
+									<LabelList
+										position="top"
+										className="fill-foreground"
+									/>
+								</Bar>
+							</BarChart>
+						</ChartContainer>
+					</CardContent>
+					<CardFooter className="text-sm">
+						Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
+					</CardFooter>
+				</Card>
+			</div>
+		</>
 	);
 };
 
